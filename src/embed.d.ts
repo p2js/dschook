@@ -13,8 +13,6 @@ export type Embed = {
     fields?: EmbedField[]
 }
 
-export const IS_ANIMATED = 1 << 5;
-
 type EmbedFooter = {
     text: string,
     icon_url?: string,
@@ -30,7 +28,7 @@ type EmbedMedia = {
     placeholder?: string,
     placeholder_version?: number,
     description?: string,
-    animated: boolean
+    flags?: 32
 }
 
 type EmbedProvider = {
