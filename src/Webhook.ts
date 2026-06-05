@@ -52,31 +52,6 @@ export class Webhook {
         this.#tts = tts;
         return this;
     }
-    // Internal send function that sets the appropriate parameters and resets temporary modifiers after making the request.
-    #send_raw(body: WebhookBody) {
-        let url = this.#url;
-        if (body.components) {
-            url += "?with_components=true";
-            body.flags ||= IS_COMPONENTS_V2;
-        }
-        if (typeof this.#tts == "boolean") body.tts = this.#tts;
-        fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                ...this.#as_user,
-                ...this.#in_thread,
-                ...body
-            })
-        }).then(async response => {
-            if (response.status > 399) console.warn(
-                "[DiscordWebhook] Webhook execution returned error code",
-                response.status, await response.json()
-            );
-        });
-        this.#as_user = this.#in_thread = {};
-        this.#tts = undefined;
-    }
     /**
      * Send a message with one or more content types.
      * Note that the presence of components will override any other contents.
@@ -117,6 +92,32 @@ export class Webhook {
         if (typeof allow_multiselect == "boolean") poll.allow_multiselect = allow_multiselect;
 
         this.#send_raw({ poll });
+    }
+    // Internal send function that sets the appropriate parameters and resets temporary modifiers after making the request.
+    #send_raw(body: WebhookBody) {
+        let url = this.#url;
+        if (body.components) {
+            url += "?with_components=true";
+            body.flags ||= IS_COMPONENTS_V2;
+        }
+        if (typeof this.#tts == "boolean") body.tts = this.#tts;
+
+        fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                ...this.#as_user,
+                ...this.#in_thread,
+                ...body
+            })
+        }).then(async response => {
+            if (response.status > 399) console.warn(
+                "[DiscordWebhook] Webhook execution returned error code",
+                response.status, await response.json()
+            );
+        });
+        this.#as_user = this.#in_thread = {};
+        this.#tts = undefined;
     }
 }
 
