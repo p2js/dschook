@@ -1,8 +1,6 @@
 import { Attachment } from "./attachment.js";
 import { colors } from "./color.js";
 import { Component, components, IS_COMPONENTS_V2 } from "./components.js";
-import { Embed } from "./embed.js";
-import { Poll, PollAnswer } from "./poll.js";
 
 export class Webhook {
     /** Declarative, functional API for composing ComponentsV2. */
@@ -112,7 +110,7 @@ export class Webhook {
 type User = { username?: string, avatar_url?: string }
 type Thread = { thread_name?: string, applied_tags?: string[] }
 
-export { Component, Embed, Poll, PollAnswer }
+export { Component }
 export type WebhookBody = WebhookContents & {
     username?: string,
     avatar_url?: string,
@@ -131,3 +129,66 @@ export type WebhookContents = Partial<{
     poll: Poll,
     components: Component[]
 }>
+
+
+// Types for poll and embed
+
+export type Poll = {
+    question: { text: string },
+    answers: PollAnswer[],
+    duration?: number,
+    allow_multiselect?: boolean
+}
+
+export type PollAnswer = { poll_media: { text: string, emoji?: Partial<{ name: string, id: string }> } }
+
+export type Embed = {
+    title?: string,
+    description?: string,
+    url?: string,
+    timestamp?: string, // TODO: ISO8601Timestamp type
+    color?: number, // TODO: expose utility functions for this
+    footer?: EmbedFooter,
+    image?: EmbedMedia,
+    thumbnail?: EmbedMedia,
+    video?: EmbedMedia,
+    provider?: EmbedProvider,
+    author?: EmbedAuthor,
+    fields?: EmbedField[]
+}
+
+type EmbedFooter = {
+    text: string,
+    icon_url?: string,
+    proxy_icon_url?: string
+}
+
+type EmbedMedia = {
+    url: string,
+    proxy_url?: string,
+    height?: number,
+    width?: number,
+    content_type?: number,
+    placeholder?: string,
+    placeholder_version?: number,
+    description?: string,
+    flags?: 32
+}
+
+type EmbedProvider = {
+    name?: string,
+    url?: string
+}
+
+type EmbedAuthor = {
+    name: string,
+    url?: string,
+    icon_url?: string,
+    proxy_icon_url?: string
+}
+
+type EmbedField = {
+    name: string,
+    value: string,
+    inline?: boolean
+}

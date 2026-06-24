@@ -1,11 +1,15 @@
 {
   "name": "discord-webhook",
   "version": "1.0.0",
-  "description": "",
+  "description": "Convenience library for Discord's Webhook API",
   "main": "lib/Webhook.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "readme.md",
+    "lib"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
