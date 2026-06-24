@@ -1,5 +1,5 @@
 {
-  "name": "discord-webhook",
+  "name": "dschook",
   "version": "1.0.0",
   "description": "Convenience library for Discord's Webhook API",
   "main": "lib/Webhook.js",
@@ -10,8 +10,11 @@
     "readme.md",
     "lib"
   ],
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Discord",
+    "Webhook"
+  ],
+  "author": "Alfio (p2js)",
   "license": "ISC",
   "devEngines": {
     "packageManager": {

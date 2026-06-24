@@ -1,3 +1,5 @@
+# dschook
+
 Simple convenience library for type-safe interaction with discord's Webhook API.
 
 Includes a functional API for componentsV2 objects.
@@ -7,7 +9,7 @@ Includes a functional API for componentsV2 objects.
 Install:
 
 ```sh
-pnpm install discord-webhook # or npm, bun, ...
+pnpm install dschook # or npm, bun, ...
 ```
 
 Use:
