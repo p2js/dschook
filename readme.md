@@ -73,6 +73,31 @@ hook.send({
 });
 ```
 
+### Message modifiers
+
+Sending messages as a user:
+
+```js
+hook.as_user("Charles", /* optional */ "avatarURL").sendText("My name is Charles");
+```
+
+Sending messages in a thread (the webhook must be in a forum to work):
+
+```js
+hook.in_thread("Good morning thread").sendComponents(
+    text("Good morning!")
+);
+```
+
+Sending messages with text-to-speech:
+
+```js
+hook.with_tts().send_text("boo!");
+```
+
+These modifiers can be stacked.
+
+
 ## Currently unsupported
 
 PRs welcome!
