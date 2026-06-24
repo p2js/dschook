@@ -5,22 +5,16 @@ import { Embed } from "./embed.js";
 import { Poll, PollAnswer } from "./poll.js";
 
 export class Webhook {
-    /**
-     * Declarative, functional API for composing ComponentsV2.
-     */
+    /** Declarative, functional API for composing ComponentsV2. */
     static components = components;
-    /**
-     * Utility functions for Discord's integer color formatting.
-     */
+    /** Utility functions for Discord's integer color formatting. */
     static colors = colors;
     // Internal fields and modifiers
     #url: string;
     #tts?: boolean = undefined;
     #as_user: User = {};
     #in_thread: Thread = {};
-    /**
-     * @param url Discord webhook URL
-     */
+    /** @param url Discord webhook URL */
     constructor(url: string) {
         this.#url = url;
     }
@@ -57,22 +51,16 @@ export class Webhook {
      * Note that the presence of components will override any other contents.
      */
     send(contents: WebhookContents) { this.#send_raw(contents) }
-    /**
-     * Send a text message.
-     */
+    /** Send a text message. */
     send_text(content: string) { this.#send_raw({ content }) }
-    /**
-     * Send a message with 1-10 rich embeds.
-     */
+    /** Send a message with 1-10 rich embeds. */
     send_embed(...embeds: Embed[]) { this.#send_raw({ embeds }) }
     /**
      * Send a message with one or more ComponentsV2.
      * Use the static `Webhook.components` for a declarative functional API for constructing components.
      */
     send_components(...components: Component[]) { this.#send_raw({ components }) }
-    /**
-     * Send a poll message. 
-     */
+    /** Send a poll message. */
     send_poll(
         question: string,
         answers: (string | { text: string, emoji_id?: string, emoji_name?: string })[],
@@ -98,7 +86,7 @@ export class Webhook {
         let url = this.#url;
         if (body.components) {
             url += "?with_components=true";
-            body.flags ||= IS_COMPONENTS_V2;
+            body.flags = (body.flags ?? 0) | IS_COMPONENTS_V2;
         }
         if (typeof this.#tts == "boolean") body.tts = this.#tts;
 
@@ -124,7 +112,7 @@ export class Webhook {
 type User = { username?: string, avatar_url?: string }
 type Thread = { thread_name?: string, applied_tags?: string[] }
 
-export { Component, Embed, Poll, PollAnswer };
+export { Component, Embed, Poll, PollAnswer }
 export type WebhookBody = WebhookContents & {
     username?: string,
     avatar_url?: string,
