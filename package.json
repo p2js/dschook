@@ -1,6 +1,6 @@
 {
   "name": "dschook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convenience library for Discord's Webhook API",
   "main": "lib/Webhook.js",
   "scripts": {
