@@ -15,7 +15,7 @@ pnpm install dschook # or npm, bun, ...
 Use:
 
 ```js
-import { Webhook } from "discord-webhook";
+import { Webhook } from "dschook";
 const hook = new Webhook("https://discord.com/api/webhooks/...");
 ```
 
