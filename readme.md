@@ -73,4 +73,6 @@ hook.send({
 
 ## Currently unsupported
 
-Uploading attachments and/or files. You're welcome to open a PR for it if you'd like.
+PRs welcome!
+- Uploading attachments and/or files
+- Editing and deleting uploaded webhooks
